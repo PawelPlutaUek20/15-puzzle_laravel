@@ -30,9 +30,7 @@ class LeaderboardController extends Controller
             'name' => $data['name']
         ]);
 
-        $r = array_diff(array($player->time, $data['time']), array(null));
-
-        $player->time = min($r);
+        $player->time = empty($player->time) ? $data['time'] : min($player->time, $data['time']);
 
         $player->save();
 
